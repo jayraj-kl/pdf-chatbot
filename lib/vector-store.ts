@@ -3,11 +3,11 @@ import { env } from "./config";
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { PineconeStore } from "@langchain/pinecone";
 import { Pinecone } from "@pinecone-database/pinecone";
+import { Document } from "@langchain/core/documents";
 
 export async function embedAndStoreDocs(
   client: Pinecone,
-  // @ts-ignore docs type error
-  docs: Document<Record<string, any>>[]
+  docs: Document<Record<string, unknown>>[]
 ) {
   /*create and store the embeddings in the vectorStore*/
   try {

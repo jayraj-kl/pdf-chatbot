@@ -40,28 +40,36 @@ export async function callChain({ question, chatHistory }: callChainArgs) {
 
     // Question using chat-history
     // Reference https://js.langchain.com/docs/modules/chains/popular/chat_vector_db#externally-managed-memory
-    chain.call(
-      {
-        question: sanitizedQuestion,
-        chat_history: chatHistory,
-      },
-      [handlers]
-    );
-    //   .then(async (res) => {
-    //     const sourceDocuments = res?.sourceDocuments;
-    //     const firstTwoDocuments = sourceDocuments.slice(0, 2);
-    //     const pageContents = firstTwoDocuments.map(
-    //       ({ pageContent }: { pageContent: string }) => pageContent
-    //     );
-    //     console.log("already appended ", data);
-    //     data.append({
-    //       sources: pageContents,
-    //     });
-    //     data.close();
-    //   });
+    chain
+      .call(
+        {
+          question: sanitizedQuestion,
+          chat_history: chatHistory,
+        },
+        [handlers]
+      )
+      .then(async (res) => {
+        const sourceDocuments = res?.sourceDocuments;
+        const firstTwoDocuments = sourceDocuments.slice(0, 2);
+        const pageContents = firstTwoDocuments.map(
+          ({ pageContent }: { pageContent: string }) => pageContent
+        );
+        console.log("sourceDocuments", sourceDocuments);
+        console.log("firstTwoDocuments", firstTwoDocuments);
+        console.log("pageContents", pageContents);
+        // console.log("already appended ", data);
+        // data.append({
+        //   sources: pageContents,
+        // });
+        // data.close();
+      });
 
     // Return the readable stream
-    return new StreamingTextResponse(stream);
+    return new StreamingTextResponse(
+      stream,
+      {}
+      // data
+    );
   } catch (e) {
     console.error(e);
     throw new Error("Call chain method failed to execute successfully!!");

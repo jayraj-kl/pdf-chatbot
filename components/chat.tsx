@@ -24,7 +24,7 @@ export function Chat() {
     <>
       <div className="rounded-2xl border h-[75vh] flex flex-col justify-between">
         <div className="p-6 overflow-auto" ref={containerRef}>
-          {messages.map(({ id, role, content }: Message, index) => (
+          {messages.map(({ id, role, content }: Message) => (
             <ChatBubble key={id} role={role} content={content} sources={[]} />
           ))}
         </div>

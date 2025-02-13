@@ -67,7 +67,7 @@ export function ChatBubble({
                       <AccordionContent>
                         <ReactMarkdown
                           components={{
-                            a: ({ node, ...props }) => (
+                            a: ({ ...props }) => (
                               <a
                                 target="_blank"
                                 rel="noopener noreferrer"
