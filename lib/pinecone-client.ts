@@ -38,6 +38,7 @@ async function initPineconeClient() {
       // environment: env.PINECONE_ENVIRONMENT,
     });
     const indexName = env.PINECONE_INDEX_NAME;
+    console.log("Index Name:" + indexName);
     if (!/^[a-z0-9-]+$/.test(indexName)) {
       throw new Error(
         "Index name must consist of lowercase alphanumeric characters or '-'"
